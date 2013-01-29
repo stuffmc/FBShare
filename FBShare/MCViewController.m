@@ -73,25 +73,35 @@
                                             completion:^(BOOL granted, NSError *e) {
         NSLog(@"G: %d — e: %@", granted, e);
         if (granted) {
-          NSArray *accounts = [self.accountStore accountsWithAccountType:_facebookAccountType];
-          facebookAccount = [accounts lastObject];
-          
-          NSString *message = [NSString stringWithFormat:@"Post on %@", [NSDate date]];
-          NSDictionary *parameters = @{@"message": message};
-          
-          NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
-          
-          SLRequest *feedRequest = [SLRequest
+            NSArray *accounts = [self.accountStore accountsWithAccountType:_facebookAccountType];
+            facebookAccount = [accounts lastObject];
+
+            // Which fields? See https://developers.facebook.com/docs/reference/api/publishing/
+            NSString *message = [NSString stringWithFormat:@"Post on %@", [NSDate date]];
+            NSDictionary *parameters = @{@"message": message,
+                                       @"picture" : @"http://commentsapp.co/wp-content/uploads/2012/12/icon_128x128.png",
+                                       @"link" : @"http://commentsapp.co"
+                                       ,@"name" : @"name?"
+                                       ,@"caption": @"caption?"
+                                       ,@"description": @"description here"
+                                       ,@"source" : @"http://diskalarm.com" // Unsure where that appears in the wall...... anyone?
+            //                                       ,@"place" : @"Irgendwo (Place!)" // Didn't checked how it works
+            //                                       ,@"tags" : @"Tag Tag TigidiTag!" // Probably a user ID but I don't need it personally ;-)
+                                       };
+
+            NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
+
+            SLRequest *feedRequest = [SLRequest
                                     requestForServiceType:SLServiceTypeFacebook
                                     requestMethod:SLRequestMethodPOST
                                     URL:feedURL
                                     parameters:parameters];
-          
-          feedRequest.account = facebookAccount;
-          [feedRequest performRequestWithHandler:^(NSData *responseData,
+
+            feedRequest.account = facebookAccount;
+            [feedRequest performRequestWithHandler:^(NSData *responseData,
                                                    NSHTTPURLResponse *urlResponse, NSError *error) {
                NSLog(@"error: %@\nurlResponse: %@", error, [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-           }];
+            }];
         } else {
           switch (e.code) {
               case 6:

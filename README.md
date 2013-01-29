@@ -9,8 +9,8 @@ The `SLRequest` way required a little bit of digging in Facebook's docs and [thi
 
 It's a 2 step process though the first time (which, given, can be done in one):
 
-- An initial step is for the user to "allow the app" to post for him
-- Then, on each "post" it's asked again
+1. An initial step is for the user to "allow the app" to post for him
+2. Then, on each "post" it's asked again
 
 It means the very first time it's required to show 2 steps (the first one could done in some settings or else, but since you don't need a setting with the Facebook credentials in your app...)
 
