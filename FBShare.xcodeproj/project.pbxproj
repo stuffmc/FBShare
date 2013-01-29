@@ -18,6 +18,10 @@
 		4C7A246916B445E90048B434 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A246816B445E90048B434 /* Default-568h@2x.png */; };
 		4C7A246C16B445E90048B434 /* MCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A246B16B445E90048B434 /* MCViewController.m */; };
 		4C7A246F16B445E90048B434 /* MCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A246D16B445E90048B434 /* MCViewController.xib */; };
+		4C7A247616B4460C0048B434 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7A247516B4460C0048B434 /* Social.framework */; };
+		4C7A247816B448BA0048B434 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A247716B448BA0048B434 /* avatar.png */; };
+		4C7A247A16B449AF0048B434 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A247916B449AF0048B434 /* cat.png */; };
+		4C7A247C16B44B960048B434 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7A247B16B44B960048B434 /* Accounts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		4C7A246A16B445E90048B434 /* MCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCViewController.h; sourceTree = "<group>"; };
 		4C7A246B16B445E90048B434 /* MCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCViewController.m; sourceTree = "<group>"; };
 		4C7A246E16B445E90048B434 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MCViewController.xib; sourceTree = "<group>"; };
+		4C7A247516B4460C0048B434 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4C7A247716B448BA0048B434 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = avatar.png; path = ../../../../../Pictures/avatar.png; sourceTree = "<group>"; };
+		4C7A247916B449AF0048B434 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cat.png; path = ../../../../../Desktop/cat.png; sourceTree = "<group>"; };
+		4C7A247B16B44B960048B434 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7A247C16B44B960048B434 /* Accounts.framework in Frameworks */,
+				4C7A247616B4460C0048B434 /* Social.framework in Frameworks */,
 				4C7A245316B445E90048B434 /* UIKit.framework in Frameworks */,
 				4C7A245516B445E90048B434 /* Foundation.framework in Frameworks */,
 				4C7A245716B445E90048B434 /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +66,10 @@
 		4C7A244316B445E90048B434 = {
 			isa = PBXGroup;
 			children = (
+				4C7A247B16B44B960048B434 /* Accounts.framework */,
+				4C7A247716B448BA0048B434 /* avatar.png */,
+				4C7A247916B449AF0048B434 /* cat.png */,
+				4C7A247516B4460C0048B434 /* Social.framework */,
 				4C7A245816B445E90048B434 /* FBShare */,
 				4C7A245116B445E90048B434 /* Frameworks */,
 				4C7A244F16B445E90048B434 /* Products */,
@@ -164,6 +178,8 @@
 				4C7A246716B445E90048B434 /* Default@2x.png in Resources */,
 				4C7A246916B445E90048B434 /* Default-568h@2x.png in Resources */,
 				4C7A246F16B445E90048B434 /* MCViewController.xib in Resources */,
+				4C7A247816B448BA0048B434 /* avatar.png in Resources */,
+				4C7A247A16B449AF0048B434 /* cat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +309,7 @@
 				4C7A247416B445E90048B434 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
