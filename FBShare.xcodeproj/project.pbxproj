@@ -45,6 +45,7 @@
 		4C7A247716B448BA0048B434 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = avatar.png; path = ../../../../../Pictures/avatar.png; sourceTree = "<group>"; };
 		4C7A247916B449AF0048B434 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cat.png; path = ../../../../../Desktop/cat.png; sourceTree = "<group>"; };
 		4C7A247B16B44B960048B434 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4CAA29E216B82FBF00B3FE4D /* AppID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppID.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				4C7A246B16B445E90048B434 /* MCViewController.m */,
 				4C7A246D16B445E90048B434 /* MCViewController.xib */,
 				4C7A245916B445E90048B434 /* Supporting Files */,
+				4CAA29E216B82FBF00B3FE4D /* AppID.h */,
 			);
 			path = FBShare;
 			sourceTree = "<group>";

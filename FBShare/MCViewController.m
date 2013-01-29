@@ -8,12 +8,17 @@
 //  THIS HELPED A LOT: http://facebook.stackoverflow.com/questions/12644229/ios-6-facebook-posting-procedure-ends-up-with-remote-app-id-does-not-match-stor
 
 #import "MCViewController.h"
+// This file has solely this content: #define APP_ID @"123456" // Your Facebook App ID.
+#import "AppID.h"
 
 @interface MCViewController ()
 
 @property (strong, nonatomic) ACAccountStore *accountStore;
 @property (strong, nonatomic) ACAccountType *facebookAccountType;
 @property (strong, nonatomic) NSMutableDictionary *fbOptions;
+@property (strong, nonatomic) NSArray *fbAccounts;
+@property (readonly) BOOL hasFacebookAccount;
+@property (weak, nonatomic) IBOutlet UIButton *requestButton;
 
 @end
 
@@ -22,13 +27,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+//    [self changeRequestButtonVisibility];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)hasFacebookAccount {
+    return self.fbAccounts != nil && self.fbAccounts.count;
+}
+
+- (void)changeRequestButtonVisibility
+{
+    self.requestButton.hidden = !self.hasFacebookAccount;
 }
 
 - (IBAction)share:(id)sender {
@@ -42,16 +56,19 @@
         
     }];
 }
+
 - (IBAction)basic:(id)sender {
     self.accountStore = [[ACAccountStore alloc] init];
     self.facebookAccountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
     // Specify App ID and permissions
-    self.fbOptions = [@{ACFacebookAppIdKey: @"319469588153965", ACFacebookPermissionsKey: @[@"email"], ACFacebookAudienceKey: ACFacebookAudienceFriends} mutableCopy];
+    self.fbOptions = [@{ACFacebookAppIdKey: APP_ID, ACFacebookPermissionsKey: @[@"email"], ACFacebookAudienceKey: ACFacebookAudienceFriends} mutableCopy];
     [self.accountStore requestAccessToAccountsWithType:self.facebookAccountType
                                           options:self.fbOptions completion:^(BOOL granted, NSError *e) {
         NSLog(@"G: %d — e: %@", granted, e);
-        if (!granted) {
+        if (granted) {
+            [self changeRequestButtonVisibility];
+        } else {
             switch (e.code) {
               case 6:
                   NSLog(@"Please setup a Facebook account from the settings");
@@ -64,7 +81,22 @@
     }];
 }
 
+- (NSArray*)fbAccounts
+{
+    if (!_fbAccounts) {
+        _fbAccounts = [self.accountStore accountsWithAccountType:_facebookAccountType];
+        if (!self.hasFacebookAccount) {
+            NSLog(@"No Facebook Account found — which at this state might also mean Step 1 (basic) wasn't done...");
+        }
+    }
+    return _fbAccounts;
+}
+
 - (IBAction)request:(id)sender {
+    if (!self.fbAccounts) {
+        return;
+    }
+    
     // Specify App ID and permissions
     self.fbOptions[ACFacebookPermissionsKey] = @[[self.fbOptions[ACFacebookPermissionsKey] lastObject], @"publish_actions"];
     __block ACAccount *facebookAccount = nil;
@@ -73,8 +105,7 @@
                                             completion:^(BOOL granted, NSError *e) {
         NSLog(@"G: %d — e: %@", granted, e);
         if (granted) {
-            NSArray *accounts = [self.accountStore accountsWithAccountType:_facebookAccountType];
-            facebookAccount = [accounts lastObject];
+            facebookAccount = [self.fbAccounts lastObject];
 
             // Which fields? See https://developers.facebook.com/docs/reference/api/publishing/
             NSString *message = [NSString stringWithFormat:@"Post on %@", [NSDate date]];
