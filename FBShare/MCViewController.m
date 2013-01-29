@@ -27,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self changeRequestButtonVisibility];
+    [self fbAccounts];
+    [self changeRequestButtonVisibility];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +38,7 @@
 }
 
 - (BOOL)hasFacebookAccount {
-    return self.fbAccounts != nil && self.fbAccounts.count;
+    return _fbAccounts != nil && _fbAccounts.count;
 }
 
 - (void)changeRequestButtonVisibility
@@ -59,7 +60,7 @@
 
 - (IBAction)basic:(id)sender {
     self.accountStore = [[ACAccountStore alloc] init];
-    self.facebookAccountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    self.facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
     // Specify App ID and permissions
     self.fbOptions = [@{ACFacebookAppIdKey: APP_ID, ACFacebookPermissionsKey: @[@"email"], ACFacebookAudienceKey: ACFacebookAudienceFriends} mutableCopy];
@@ -84,7 +85,7 @@
 - (NSArray*)fbAccounts
 {
     if (!_fbAccounts) {
-        _fbAccounts = [self.accountStore accountsWithAccountType:_facebookAccountType];
+        _fbAccounts = [self.accountStore accountsWithAccountType:self.facebookAccountType];
         if (!self.hasFacebookAccount) {
             NSLog(@"No Facebook Account found — which at this state might also mean Step 1 (basic) wasn't done...");
         }
